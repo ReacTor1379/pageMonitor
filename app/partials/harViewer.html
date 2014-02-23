@@ -1,0 +1,47 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <a href="#">Home</a> <span class="divider">/</span>
+        </li>
+        <li>
+            <a href="#">页面瀑布流</a>
+        </li>
+    </ul>
+    <link rel="stylesheet" href="css/harViewer.css" type="text/css"/>
+    <select ng-model="harURL" ng-options="u.name for u in urls" ng-change="update()">
+        <option value="">-- 请选择 --</option>
+    </select>
+    <div class="control-group">
+        <label class="control-label" for="focusedInput">邮件地址</label>
+        <div class="controls">
+            <input class="input-xlarge focused" ng-model="destAddr" type="text" placeholder="example@example.com">
+        </div>
+    </div>
+    <button class="btn btn-primary" ng-click="sendMail()">发送测试邮件</button>
+    <div class="row-fluid sortable ui-sortable" id="content">
+        <div class="box">
+            <div class="box-header well">
+                <h2><i class="icon-list-alt"></i> 统计图</h2>
+                <div class="box-icon">
+                    <a href="javascript:void(0);" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <div id="stats"></div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-header well">
+                <h2><i class="icon-list-alt"></i> 瀑布图</h2>
+                <div class="box-icon">
+                    <a href="javascript:void(0);" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <div id="waterfall"></div>
+            </div>
+        </div>
+    </div>
+</div>
