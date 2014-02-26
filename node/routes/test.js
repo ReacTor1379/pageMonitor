@@ -13,7 +13,7 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 
 exports.sendmail = function(req, res) {
     var exec = require("child_process").exec;
-    exec ('/root/phantomjs-1.9.2-linux-x86_64/bin/phantomjs /root/phantomjs-1.9.2-linux-x86_64/examples/technews.js ' + req.body.sniffurl, function(error, stdout, stderr) {
+    exec ('/root/phantomjs-1.9.2-linux-x86_64/bin/phantomjs technews.js http://172.16.86.173/game/readhar.php', function(error, stdout, stderr) {
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: "报警机器人 <sina.mps@staff.sina.com.cn>", // sender address

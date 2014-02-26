@@ -6,8 +6,7 @@ define([
     "common/comp/datatable"
 ], function (app, HarPreview) {
     var harViewerCtrl = function ($scope, $http, $location) {
-        var content = document.getElementById("content");
-        var harView = content.repObject = new HarPreview();
+        var harView = null;
         var lock = false;
         var procURL = '';
 
@@ -22,7 +21,7 @@ define([
         $scope.sendMail = function() {
             $http.post('/test/sendmail', {
                 addr: $scope.destAddr,
-                sniffurl: $scope.harURL.value
+                content: ''
             }).success(function(json, status, headers, config) {
                     if (json.code != 100000 || json.data.length <= 0) {
                         $location.url('/readPost');
@@ -33,7 +32,6 @@ define([
 
         $scope.update = function() {
             if (!$scope.harURL || lock) {
-                console.log('lock');
                 for (var i in $scope.urls) {
                     if ($scope.urls[i].value == procURL) {
                         $scope.harURL = $scope.urls[i];
@@ -45,31 +43,36 @@ define([
             lock = true;
             procURL = $scope.harURL.value;
             $('#waterfall')[0].innerHTML = '';
+            $("#content")[0].style.display = 'none';
 
             var settings = {
                 jsonp: true
             }
+            if (!harView) {
+                var content = document.getElementById("content");
+                var harView = content.repObject = new HarPreview();
+                var fn = function() {
+                    harView.setRenderNode({
+                        stats: $("#stats")[0],
+                        waterfall: $("#waterfall")[0]
+                    })
+                }
+                harView.initialize(content, fn);
+
+                $("#content").bind("onPreviewHARLoaded", function(event) {
+                    lock = false;
+                    procURL = '';
+                    $("#content")[0].style.display = '';
+                });
+            }
             harView.loadHar($scope.harURL.value, settings);
         }
 
-        var fn = function() {
-            harView.setRenderNode({
-                stats: $("#stats")[0],
-                waterfall: $("#waterfall")[0]
-            })
-        }
-        harView.initialize(content, fn);
-
-        $("#content").bind("onPreviewHARLoaded", function(event) {
-            lock = false;
-            procURL = '';
-            $(".box").fadeIn();
-        });
+        
     };
 
     app.register.controller('harViewerCtrl', ['$scope', '$http', '$location', harViewerCtrl]);
 });
-
 
 
 

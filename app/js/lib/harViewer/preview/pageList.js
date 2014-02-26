@@ -41,10 +41,10 @@ PageList.prototype = domplate(
             TR({"class": "pageRow", _repObject: "$group"},
                 TD({"class": "groupName pageCol", width: "1%"},
                     SPAN({"class": "pageName"}, "$group|getPageTitle")
-                ),
-                TD({"class": "netOptionsCol netCol", width: "15px"},
-                    DIV({"class": "netOptionsLabel netLabel", onclick: "$onOpenOptions"})
                 )
+                // TD({"class": "netOptionsCol netCol", width: "15px"},
+                //     DIV({"class": "netOptionsLabel netLabel", onclick: "$onOpenOptions"})
+                // )
             )
         ),
 
