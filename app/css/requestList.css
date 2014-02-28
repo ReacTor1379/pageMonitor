@@ -440,11 +440,11 @@
     display: table-cell;
 }
 
-#content[previewCols~=url] TD.netHrefCol,
-#content[previewCols~=status] TD.netStatusCol,
-#content[previewCols~=domain] TD.netDomainCol,
-#content[previewCols~=size] TD.netSizeCol,
-#content[previewCols~=timeline] TD.netTimeCol,
-#content[previewCols~=type] TD.netTypeCol {
+#harViewer[previewCols~=url] TD.netHrefCol,
+#harViewer[previewCols~=status] TD.netStatusCol,
+#harViewer[previewCols~=domain] TD.netDomainCol,
+#harViewer[previewCols~=size] TD.netSizeCol,
+#harViewer[previewCols~=timeline] TD.netTimeCol,
+#harViewer[previewCols~=type] TD.netTypeCol {
     display: table-cell;
 }

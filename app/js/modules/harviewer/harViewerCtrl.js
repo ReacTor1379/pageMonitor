@@ -43,13 +43,13 @@ define([
             lock = true;
             procURL = $scope.harURL.value;
             $('#waterfall')[0].innerHTML = '';
-            $("#content")[0].style.display = 'none';
+            $("#harViewer")[0].style.display = 'none';
 
             var settings = {
                 jsonp: true
             }
             if (!harView) {
-                var content = document.getElementById("content");
+                var content = document.getElementById("harViewer");
                 var harView = content.repObject = new HarPreview();
                 var fn = function() {
                     harView.setRenderNode({
@@ -59,10 +59,10 @@ define([
                 }
                 harView.initialize(content, fn);
 
-                $("#content").bind("onPreviewHARLoaded", function(event) {
+                $("#harViewer").bind("onPreviewHARLoaded", function(event) {
                     lock = false;
                     procURL = '';
-                    $("#content")[0].style.display = '';
+                    $("#harViewer")[0].style.display = '';
                 });
             }
             harView.loadHar($scope.harURL.value, settings);

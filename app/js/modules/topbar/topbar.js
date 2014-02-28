@@ -6,7 +6,6 @@ define([], function() {
     $('#themes a[data-value="'+current_theme+'"]').find('i').addClass('icon-ok');
                  
     $('#themes a').click(function(e){
-        e.preventDefault();
         current_theme=$(this).attr('data-value');
         $.cookie('current_theme',current_theme,{expires:365});
         switch_theme(current_theme);

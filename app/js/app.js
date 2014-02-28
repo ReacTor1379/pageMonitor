@@ -37,6 +37,7 @@ define([
                 .when('/test', {templateUrl:'partials/test.html'})
                 .when('/dashboard', route.resolve('dashboard', 'dashboard/'))
                 .when('/harViewer', route.resolve('harViewer', 'harviewer/'))
+                .when('/configure', route.resolve('configure', 'configure/'))
                 .when('/test', route.resolve('test', 'test/'))
                 .otherwise({redirectTo: '/test'});
     }]);

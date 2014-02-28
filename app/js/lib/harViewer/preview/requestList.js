@@ -83,7 +83,7 @@ RequestList.getVisibleColumns = function()
 
     if (!cols)
     {
-        var content = document.getElementById("content");
+        var content = document.getElementById("harViewer");
         if (content)
         {
             cols = content.getAttribute("previewCols");
@@ -104,7 +104,7 @@ RequestList.setVisibleColumns = function(cols, avoidCookies)
     if (cols.join)
         cols = cols.join(" ");
 
-    var content = document.getElementById("content");
+    var content = document.getElementById("harViewer");
     if (content)
         content.setAttribute("previewCols", cols);
 

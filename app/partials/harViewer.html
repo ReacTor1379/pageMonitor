@@ -1,10 +1,17 @@
+<noscript>
+    <div class="alert alert-block span10">
+        <h4 class="alert-heading">Warning!</h4>
+        <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+    </div>
+</noscript>
+<div id="content" class="span10">
 <div>
     <ul class="breadcrumb">
         <li>
-            <a href="#">Home</a> <span class="divider">/</span>
+            <a href="/">Home</a> <span class="divider">/</span>
         </li>
         <li>
-            <a href="#">页面瀑布流</a>
+            <a href="#/harViewer">页面瀑布流</a>
         </li>
     </ul>
     <link rel="stylesheet" href="css/harViewer.css" type="text/css"/>
@@ -14,11 +21,11 @@
     <div class="control-group">
         <label class="control-label" for="focusedInput">邮件地址</label>
         <div class="controls">
-            <input class="input-xlarge focused" ng-model="destAddr" type="text" placeholder="example@example.com">
+            <input class="input-xlarge focused" ng-model="destAddr" type="text" placeholder="address@example.com">
         </div>
     </div>
     <button class="btn btn-primary" ng-click="sendMail()">发送测试邮件</button>
-    <div class="row-fluid sortable ui-sortable" id="content" style="display:none;">
+    <div class="row-fluid sortable ui-sortable" id="harViewer" style="display:none;">
         <div class="box">
             <div class="box-header well">
                 <h2><i class="icon-list-alt"></i> 统计图</h2>
@@ -44,4 +51,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
