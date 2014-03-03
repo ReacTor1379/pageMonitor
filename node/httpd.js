@@ -1,7 +1,7 @@
 var path                 = require('path');
 var fs                     = require('fs');
 var cluster             = require('cluster');
-var config                 = require('./config');
+var config                 = require('./config/httpd');
 var createWorkerServer    = require('./worker');
 
 if(cluster.isMaster) {
@@ -48,7 +48,7 @@ if(cluster.isMaster) {
       });
     });
     
-    process.title = 'weibo-ria-server';//linux only
+    process.title = 'saiyan-server';//linux only
 } else {
     createWorkerServer();
 }
