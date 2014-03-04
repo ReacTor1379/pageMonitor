@@ -8,7 +8,7 @@ process.on('uncaughtException', function(err) {
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var config = require('./config/config');
-// var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 module.exports = function() {
     /**
@@ -16,8 +16,8 @@ module.exports = function() {
      * Please note that the order of loading is important.
      */
     // Bootstrap db connection
-    // var db = mongoose.connect(config.db);
-var db;
+    var db = mongoose.connect(config.db);
+    
     // Init the express application
     var app = require('./express/server')(db);
 

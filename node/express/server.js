@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var express = require('express');
-    //mongoStore = require('connect-mongo')(express);
+//var mongoStore = require('connect-mongo')(express);
 var config = require('../config/config');
 var path = require('path');
 var utilities = require('./utilities');
@@ -86,7 +86,11 @@ module.exports = function(db) {
     // app.use(express.session({
     //     secret: config.sessionSecret,
     //     store: new mongoStore({
-    //         db: db.connection.db,
+    //         db: 'testDb',
+    //         host: db.connection.db,
+    //         port: db.connection.db,
+    //         usename: 'testrw',
+    //         password: '1234567',
     //         collection: config.sessionCollection
     //     })
     // }));
