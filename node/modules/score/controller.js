@@ -20,7 +20,12 @@ exports.getScore = function (req, res) {
 
     child = exec(cmd + tempUrl, function(error, stdout, stderr){
         result = stdout;
-        res.write(stdout);
-        res.end();
+        if(stdout == null || stdout == ''){
+            res.write('');
+            res.end();
+        }else{
+            res.write(stdout);
+            res.end();
+        }
     });
 };

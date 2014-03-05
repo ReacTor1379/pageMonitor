@@ -74,7 +74,7 @@ define([
                     res[index].detail = res[index].detail != null ? decodeURIComponent(res[index].detail) : null;
                     index++;
                 }
-                res = pubFun.sortArr(res)
+                res = pubFun.sortArr(res);
                 return res;
             },
             calcRank: function(score){
@@ -87,14 +87,37 @@ define([
                 }
             },
             sortArr: function(arr){
-                return arr.sort(pubFun.compare);
+                arr = arr.sort(pubFun.compare);
+                return arr;
             },
             compare: function(a, b){
                 if(a.score < b.score){
+                    return -1;
+                }else if(a.score < b.score){
                     return 0;
                 }else{
                     return 1;
                 }
+            },
+            startCheckUrl: function(url){
+                $http.get('/score/getScore?url=' + url).
+                    success(function(json, status, headers, config) {
+                        
+                        if(typeof json == 'string' && json.indexOf('FAIL to load') > -1){
+                            alert('无效的URL地址，请重试！');
+                            _loading.hideLoading();
+                            return;
+                        }
+
+                        var dataList = pubFun.getAndFormatData(json.g);
+                        var tempHtml = _easyTemplate.easyTemplate(TEMP, {list: dataList}).toString();
+
+                        $('#socreList').html(tempHtml);
+                        $('#socreList').find("i[action-type='showDetail']").each(function(){
+                            $(this).tooltip({placement: 'right'});
+                        });
+                        _loading.hideLoading();
+                    });
             }
         };
         /*****************************************/
@@ -116,17 +139,33 @@ define([
             $('#socreList').html("");
             _loading.showLoading();
 
-            $http.get('/score/getScore?url=' + url).
-                success(function(json, status, headers, config) {
-                    var dataList = pubFun.getAndFormatData(json.g);
-                    var tempHtml = _easyTemplate.easyTemplate(TEMP, {list: dataList}).toString();
+            pubFun.startCheckUrl(url);
+        };
 
-                    $('#socreList').html(tempHtml);
-                    $('#socreList').find("i[action-type='showDetail']").each(function(){
-                        $(this).tooltip({placement: 'right'});
-                    });
-                    _loading.hideLoading();
-                });
+        $scope.startCheck = function() {
+            var val = $('#urlToCheck').val();
+
+            if(val == null && val == ''){
+                alert('请输入URL');
+            }
+
+            var strRegex = "^((https|http|ftp|rtsp|mms)://)" +
+                "(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" + //ftp的user@  
+                "(([0-9]{1,3}\.){3}[0-9]{1,3}" + // IP形式的URL- 199.194.52.184  
+                "|" + // 允许IP和DOMAIN（域名） 
+                "([0-9a-z_!~*'()-]+\.)*" + // 域名- www.
+                "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\." + // 二级域名 
+                "[a-z]{2,6})" + // first level domain- .com or .museum
+                "(:[0-9]{1,4})?"; // 端口- :80
+
+            var re = new RegExp(strRegex);
+            if(re.test(val)){
+                $('#socreList').html("");
+                _loading.showLoading();
+                pubFun.startCheckUrl(val);
+            }else{
+                alert('请输入正确的URL');
+            }
         };
         /*****************************************/
     };
