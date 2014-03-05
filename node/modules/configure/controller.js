@@ -6,6 +6,7 @@
 var mongoose = require('mongoose');
 var Addr = mongoose.model('address');
 var Conf = mongoose.model('configure');
+var Url = mongoose.model('monitorUrl');
 var _ = require('lodash');
 
 exports.getAddress = function(req, res) {
@@ -146,6 +147,87 @@ exports.getStat = function(req, res) {
                     data: configures[0]
                 });
             }
+        }
+    });
+};
+
+exports.getUrl = function(req, res) {
+    Url.find().exec(function(err, urls) {
+        if (err) {
+            res.json({
+                code : 100001,
+                msg : '错误',
+                data: ''
+            });
+        } else {
+            res.json({
+                code : 100000,
+                msg : '成功',
+                data: urls
+            });
+        }
+    });
+};
+
+exports.addUrl = function(req, res) {
+    var reqData = {
+        name : req.body.name,
+        addr : req.body.addr
+    };
+
+    Url.create(reqData, function(error){
+        if(error) {
+            res.json({
+                code : 100001,
+                msg : error,
+                data: ''
+            });
+        } else {
+            res.json({
+                code : 100000,
+                msg : '成功',
+                data: ''
+            });
+        }
+    });
+};
+
+exports.editUrl = function(req, res) {
+    var reqData = {
+        name : req.body.name,
+        addr : req.body.addr
+    };
+    Url.update({_id:req.body.id}, reqData, function(error){
+        if(error) {
+            res.json({
+                code : 100001,
+                msg : error,
+                data: ''
+            });
+        } else {
+            res.json({
+                code : 100000,
+                msg : '成功',
+                data: ''
+            });
+        }
+    });
+};
+
+exports.delUrl = function(req, res) {
+    Url.remove({_id:req.body.id}, function(error){
+        if(error) {
+            res.json({
+                code : 100001,
+                msg : error,
+                data: ''
+            });
+        } else {
+            res.json({
+                code : 100000,
+                msg : '成功',
+                data: ''
+            });
         }
     });
 };

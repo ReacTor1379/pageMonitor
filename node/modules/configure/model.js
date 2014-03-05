@@ -38,3 +38,23 @@ var confSchema = new Schema({
 });
 
 mongoose.model('configure', confSchema);
+
+/**
+ * url Schema
+ */
+var urlSchema = new Schema({
+    name: {
+        type: String,
+        default: '',
+        required: true,
+        trim: true
+    },
+    addr: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    }
+});
+
+mongoose.model('monitorUrl', urlSchema);

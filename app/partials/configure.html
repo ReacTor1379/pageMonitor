@@ -24,6 +24,105 @@
             <div class="row-fluid sortable">    
         <div class="box span6">
           <div class="box-header well" data-original-title>
+            <h2><i class="icon-user"></i> 监控网址</h2>
+            <div class="box-icon">
+              <a href="javascript:void(0);" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+              <a href="javascript:void(0);" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+            </div>
+          </div>
+          <div class="box-content">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th style="width:80px;">名称</th>
+                  <th>地址</th>
+                  <th>操作</th>
+                </tr>
+              </thead>   
+              <tbody>
+              <tr>
+                <td>
+                  <div class="controls">
+                    <input class="span12" type="text" ng-model="newUrlName" placeholder="名称" required >
+                  </div>
+                </td>
+                <td>
+                  <div class="controls">
+                    <input class="span12" type="url" ng-model="newUrlAddr" placeholder="http://www.example.com" required>
+                  </div>
+                </td>
+                <td style="text-align:center;">
+                  <a class="btn btn-success" href="javascript:void(0);" ng-click='newUrl($event)'>
+                    <i class="icon-plus icon-white"></i>  
+                    添加
+                  </a>
+                </td>
+              </tr>
+              <tr ng-repeat="url in urls" ng-init="url.editFlag=false">
+                <td>
+                  <span ng-model='url.name' ng-if="!url.editFlag">{{url.name}}</span>
+                  <input ng-model='url.name' ng-if="url.editFlag" class="span12" type="text" value={{url.name}} required>
+                </td>
+                <td class="center">
+                  <span ng-model='url.addr' ng-if="!url.editFlag">{{url.addr}}</span>
+                  <input ng-model='url.addr' ng-if="url.editFlag" class="span12" type="url" value={{url.addr}} required>
+                </td>
+                <td style="text-align:center;">
+                  <a class="btn btn-info btn-mini" ng-if="!url.editFlag" href="javascript:void(0);" ng-click='editUrl($event, $index)'>
+                    <i class="icon-edit icon-white"></i>  
+                    编辑
+                  </a>
+                  <a class="btn btn-danger btn-mini" ng-if="!url.editFlag" href="javascript:void(0);" ng-click='delUrl($event, $index)'>
+                    <i class="icon-trash icon-white"></i> 
+                    删除
+                  </a>
+                  <a class="btn btn-primary btn-mini" ng-if="url.editFlag" href="javascript:void(0);" ng-click='saveUrl($event, $index)'>
+                    <i class="icon-ok icon-white"></i> 
+                    确定
+                  </a>
+                  <a class="btn btn-warning btn-mini" ng-if="url.editFlag" href="javascript:void(0);" ng-click='cancelUrl($event, $index)'>
+                    <i class="icon-remove icon-white"></i> 
+                    取消
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!--/span-->
+
+      <div class="box span6">
+          <div class="box-header well" data-original-title>
+            <h2><i class="icon-user"></i> 邮件内容</h2>
+            <div class="box-icon">
+              <a href="javascript:void(0);" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+              <a href="javascript:void(0);" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+            </div>
+          </div>
+          <div class="box-content">
+            <div class="control-group span12">
+              <div ng-repeat="config in configs" ng-if=$even>
+                <div class="span2"></div>
+                <label class="checkbox inline span5">
+                  <input type="checkbox" id="inlineCheckbox1" ng-model='config.checked'>{{config.display}}
+                </label>
+                <label class="checkbox inline span5" ng-if="configs[$index+1]">
+                  <input type="checkbox" id="inlineCheckbox2" ng-model='configs[$index+1].checked'>{{configs[$index+1].display}}
+                </label>
+              </div>
+            </div>
+            <div class="control-group span12 center">
+              <a class="btn btn-primary" href="javascript:void(0);" ng-click='changeConfig()'>
+                <i class="icon-ok icon-white"></i> 
+                    提交
+              </a>
+            </div>
+          </div>
+        </div><!--/span-->
+      </div>
+        <div class="row-fluid sortable"> 
+      <div class="box span6">
+          <div class="box-header well" data-original-title>
             <h2><i class="icon-user"></i> 邮件地址</h2>
             <div class="box-icon">
               <a href="javascript:void(0);" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -34,9 +133,9 @@
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th style="width:80px;">姓名</th>
-                  <th>Email</th>
-                  <th>Actions</th>
+                  <th style="width:80px;">名称</th>
+                  <th>地址</th>
+                  <th>操作</th>
                 </tr>
               </thead>   
               <tbody>
@@ -88,35 +187,6 @@
               </tr>
               </tbody>
             </table>
-          </div>
-        </div><!--/span-->
-
-      <div class="box span6">
-          <div class="box-header well" data-original-title>
-            <h2><i class="icon-user"></i> 邮件内容</h2>
-            <div class="box-icon">
-              <a href="javascript:void(0);" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-              <a href="javascript:void(0);" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-            </div>
-          </div>
-          <div class="box-content">
-            <div class="control-group span12">
-              <div ng-repeat="config in configs" ng-if=$even>
-                <div class="span2"></div>
-                <label class="checkbox inline span5">
-                  <input type="checkbox" id="inlineCheckbox1" ng-model='config.checked'>{{config.display}}
-                </label>
-                <label class="checkbox inline span5" ng-if="configs[$index+1]">
-                  <input type="checkbox" id="inlineCheckbox2" ng-model='configs[$index+1].checked'>{{configs[$index+1].display}}
-                </label>
-              </div>
-            </div>
-            <div class="control-group span12 center">
-              <a class="btn btn-primary" href="javascript:void(0);" ng-click='changeConfig()'>
-                <i class="icon-ok icon-white"></i> 
-                    提交
-              </a>
-            </div>
           </div>
         </div><!--/span-->
       
