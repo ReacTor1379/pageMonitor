@@ -38,6 +38,7 @@ define([
                 .when('/dashboard', route.resolve('dashboard', 'dashboard/'))
                 .when('/harViewer', route.resolve('harViewer', 'harviewer/'))
                 .when('/configure', route.resolve('configure', 'configure/'))
+                .when('/score', route.resolve('score', 'score/'))
                 .when('/test', route.resolve('test', 'test/'))
                 .otherwise({redirectTo: '/test'});
     }]);

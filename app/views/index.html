@@ -8,12 +8,41 @@
     <!-- The styles -->
     <link id="bs-css" href="css/bootstrap-classic.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-      body {
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        .maskLayer{
+            position:fixed;
+            top:0;
+            left:0;
+            height:100%;
+            width:100%;
+            z-index:20;
+            overflow: hidden; 
+            display:table;
+        }
+        .maskLayer .maskPicContainer{
+            width:100%;
+            height:100%;
+            text-align:center;
+            vertical-align:middle;
+            position:relative; margin: 10px;
+            *float:left;
+            display: table-cell;
+        }
+        .maskLayer .maskPicContainer .maskPicDiv{
+            *position:absolute;
+            top:50%;
+        }
+        .maskLayer .maskPicContainer .maskPicDiv .maskPic{
+            max-width:100px;
+            *position:relative;
+            top:-50%;
+            left:-50%;
+        }
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
     <link href="css/charisma-app.css" rel="stylesheet" type="text/css" />
@@ -112,8 +141,8 @@
                         <li class="nav-header hidden-tablet">Main</li>
                         <li><a class="ajax-link" href="#/harViewer"><i class="icon-eye-open"></i><span class="hidden-tablet"> 页面瀑布图</span></a></li>
                         <li><a class="ajax-link" href="#/configure"><i class="icon-edit"></i><span class="hidden-tablet"> 配置</span></a></li>
-                        <!-- <li><a class="ajax-link" href="#/dashboard"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
-                        <li><a class="ajax-link" href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
+                        <li><a class="ajax-link" href="#/score"><i class="icon-home"></i><span class="hidden-tablet"> 评分demo</span></a></li>
+                        <!-- <li><a class="ajax-link" href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
                         <li><a class="ajax-link" href="#/chart"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
                         <li><a class="ajax-link" href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
                         <li><a class="ajax-link" href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
@@ -157,7 +186,6 @@
         </footer><!--/fluid-row-->
     </div><!--/.fluid-container-->
 
-    
     <!-- external javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
